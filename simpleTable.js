@@ -2,6 +2,9 @@ var app = angular.module('simpleTable', []);
 app.controller('tableController', function($scope, $http) {
     $scope.reverseSort = false;
     $scope.orderByField = "";
+    $scope.search = {};
+
+    // csv data was converted to json data for displaying purpose.
     $scope.employees = [{
             "name": "Joe",
             "age": 30,
@@ -110,6 +113,21 @@ app.controller('tableController', function($scope, $http) {
     ];
 
 
-    // order by function: 
+    // filtered
+    $scope.filteredItems = $scope.employees;
+    $scope.result = {};
+
+    $scope.updateResult = function(fieldName) {
+        var totalSal = 0;
+        var totalAge = 0;
+        angular.forEach($scope.filteredItems, function(value) {
+            totalAge += value.age;
+            totalSal += value.salary;
+        });
+        $scope.result['averageAge'] = totalAge / $scope.filteredItems.length;
+        $scope.result['totalSalary'] = totalSal;
+    };
+
+    $scope.updateResult();
 
 });

@@ -2,22 +2,31 @@
 <html lang="en-US">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <body>
     <div ng-app="simpleTable" ng-controller="tableController">
         <h1>Simple Table App</h1>
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-4 col-xm-4"></div>
-            </div>
+        	<div class="row">
+        		<div class="col-md-4 col-sm-4 col-xm-4">
+        			<button type="button" class="btn btn-primary" ng-click="updateResult()">Calculate Current Statistics</button>
+        		</div>
+        		<div class="col-md-4 col-sm-4 col-xm-4"	>
+        			<label>Average Age: </label> {{ result.averageAge | number}}
+        		</div>
+        		<div class="col-md-4 col-sm-4 col-xm-4">
+        			<label>Total Salary: </label> {{ result.totalSalary | number}}
+        		</div>
+        	</div>
             <div class="row">
                 <div class="col-md-12 col-sm-4 col-xm-4">
                     <table class="table">
                         <tr>
                             <th>0 </th>
                             <th>
-                                <a href="#" ng-click="orderByField='name'; reverseSort = !reverseSort">
+                                <a href="#" ng-click="orderByField='name'; reverseSort = !reverseSort" title="Type: String;  Sorting: {{ orderByField != 'name' ? 'None' : (reverseSort?'Descending':'Ascending')}}">
 									Name 
 									<span ng-show="orderByField == 'name'">
 										<span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
@@ -25,7 +34,7 @@
 								</a>
                             </th>
                             <th>
-                                <a href="#" ng-click="orderByField='age'; reverseSort = !reverseSort">
+                                <a href="#" ng-click="orderByField='age'; reverseSort = !reverseSort" title="Type: Number;  Sorting: {{ orderByField != 'age' ? 'None' : (reverseSort?'Descending':'Ascending')}}">
 								Age 
 									<span ng-show="orderByField == 'age'">
 										<span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
@@ -33,7 +42,7 @@
 								</a>
                             </th>
                             <th>
-                                <a href="#" ng-click="orderByField='salary'; reverseSort = !reverseSort">
+                                <a href="#" ng-click="orderByField='salary'; reverseSort = !reverseSort" title="Type: Number;  Sorting: {{ orderByField != 'salary' ? 'None' : (reverseSort?'Descending':'Ascending')}}">
 								Salary 
 									<span ng-show="orderByField == 'salary'">
 										<span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
@@ -41,7 +50,7 @@
 								</a>
                             </th>
                             <th>
-                                <a href="#" ng-click="orderByField='title'; reverseSort = !reverseSort">
+                                <a href="#" ng-click="orderByField='title'; reverseSort = !reverseSort" title="Type: String;  Sorting: {{ orderByField != 'title' ? 'None' : (reverseSort?'Descending':'Ascending')}}">
 								Title 
 									<span ng-show="orderByField == 'title'">
 										<span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
@@ -49,12 +58,27 @@
 								</a>
                             </th>
                         </tr>
-                        <tr ng-repeat="e in employees| orderBy:orderByField:reverseSort track by $index ">
-                            <td>{{ e.row }} </td>
-                            <td>{{ e.name }}</td>
-                            <td>{{ e.age }}</td>
-                            <td>{{ e.salary }}</td>
-                            <td>{{ e.title }}</td>
+                        <tr>
+	                        <th>Filter:</th>
+	                        <th>
+	                            <input type="text" ng-model="search.name">
+	                        </th>
+	                        <th>
+	                            <input type="text" ng-model="search.age">
+	                        </th>
+	                        <th>
+	                            <input type="text" ng-model="search.salary">
+	                        </th>
+	                        <th>
+	                            <input type="text" ng-model="search.title">
+	                        </th>
+	                    </tr>
+                        <tr ng-repeat="e in (filteredItems = (employees| filter:search |orderBy:orderByField:reverseSort))">
+                            <td title="Row#: {{$index + 1}}">{{ e.row }} </td>
+                            <td title="Row#: {{$index + 1}}">{{ e.name }}</td>
+                            <td title="Row#: {{$index + 1}}">{{ e.age }}</td>
+                            <td title="Row#: {{$index + 1}}">{{ e.salary }}</td>
+                            <td title="Row#: {{$index + 1}}">{{ e.title }}</td>
                         </tr>
                     </table>
                 </div>
