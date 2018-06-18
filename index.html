@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body>
+	<div ng-app="simpleTable" ng-controller="tableController">
+	<h1>Simple Table App</h1>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-4 col-xm-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-4 col-xm-4">
+					<table class="table">
+						<tr>
+							<th>0 </th>
+							<th>
+								<a href="#" ng-click="orderByField='name'; reverseSort = !reverseSort">
+									Name 
+									<span ng-show="orderByField == 'name'">
+										<span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+									</span>
+								</a>
+							</th>
+							<th>
+								<a href="#" ng-click="orderByField='age'; reverseSort = !reverseSort">
+								Age 
+									<span ng-show="orderByField == 'age'">
+										<span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+									</span>
+								</a>
+							</th>
+							<th>
+								<a href="#" ng-click="orderByField='salary'; reverseSort = !reverseSort">
+								Salary 
+									<span ng-show="orderByField == 'salary'">
+										<span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+									</span>
+								</a>
+							</th>
+							<th>
+								<a href="#" ng-click="orderByField='title'; reverseSort = !reverseSort">
+								Title 
+									<span ng-show="orderByField == 'title'">
+										<span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span>
+									</span>
+								</a>
+							</th>
+						</tr>
+						<tr ng-repeat="e in employees| orderBy:orderByField:reverseSort track by $index ">
+							<td>{{ e.row }} </td>
+							<td>{{ e.name }}</td>
+							<td>{{ e.age }}</td>
+							<td>{{ e.salary }}</td>
+							<td>{{ e.title }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="simpleTable.js"></script>
+</body>
+</html>
