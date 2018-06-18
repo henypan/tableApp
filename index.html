@@ -9,17 +9,17 @@
     <div ng-app="simpleTable" ng-controller="tableController">
         <h1>Simple Table App</h1>
         <div class="container">
-        	<div class="row">
-        		<div class="col-md-4 col-sm-4 col-xm-4">
-        			<button type="button" class="btn btn-primary" ng-click="updateResult()">Calculate Current Statistics</button>
-        		</div>
-        		<div class="col-md-4 col-sm-4 col-xm-4"	>
-        			<label>Average Age: </label> {{ result.averageAge | number}}
-        		</div>
-        		<div class="col-md-4 col-sm-4 col-xm-4">
-        			<label>Total Salary: </label> {{ result.totalSalary | number}}
-        		</div>
-        	</div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xm-4">
+                    <button type="button" class="btn btn-primary" ng-click="updateResult()">Calculate Current Statistics</button>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xm-4">
+                    <label>Average Age: </label> {{ result.averageAge | number}}
+                </div>
+                <div class="col-md-4 col-sm-4 col-xm-4">
+                    <label>Total Salary: </label> {{ result.totalSalary | number}}
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12 col-sm-4 col-xm-4">
                     <table class="table">
@@ -59,20 +59,20 @@
                             </th>
                         </tr>
                         <tr>
-	                        <th>Filter:</th>
-	                        <th>
-	                            <input type="text" ng-model="search.name">
-	                        </th>
-	                        <th>
-	                            <input type="text" ng-model="search.age">
-	                        </th>
-	                        <th>
-	                            <input type="text" ng-model="search.salary">
-	                        </th>
-	                        <th>
-	                            <input type="text" ng-model="search.title">
-	                        </th>
-	                    </tr>
+                            <th>Filter:</th>
+                            <th>
+                                <input type="text" ng-model="search.name">
+                            </th>
+                            <th>
+                                <input type="text" ng-model="search.age">
+                            </th>
+                            <th>
+                                <input type="text" ng-model="search.salary">
+                            </th>
+                            <th>
+                                <input type="text" ng-model="search.title">
+                            </th>
+                        </tr>
                         <tr ng-repeat="e in (filteredItems = (employees| filter:search |orderBy:orderByField:reverseSort))">
                             <td title="Row#: {{$index + 1}}">{{ e.row }} </td>
                             <td title="Row#: {{$index + 1}}">{{ e.name }}</td>
