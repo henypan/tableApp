@@ -1,5 +1,5 @@
 var app = angular.module('simpleTable', []);
-app.controller('tableController', function($scope, $http) {
+app.controller('tableController', function($scope) {
     $scope.reverseSort = false;
     $scope.orderByField = "";
     $scope.search = {};
